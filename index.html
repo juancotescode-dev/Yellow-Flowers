@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para ti, mi musa 🌻</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #f5c518;
+    --amber: #e8a000;
+    --cream: #fffdf0;
+    --warm: #fff8dc;
+    --petal-light: #ffe566;
+    --petal-mid: #ffd700;
+    --petal-dark: #f0b000;
+    --center: #b8560a;
+    --center-light: #d4691a;
+    --green: #5a7a2e;
+    --stem: #6b8f3a;
+    --text-dark: #2c1a00;
+    --text-mid: #5c3d00;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: linear-gradient(160deg, #fff9e0 0%, #fffbf0 40%, #fef6c8 100%);
+    min-height: 100vh;
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  header {
+    text-align: center;
+    padding: 3rem 1rem 1rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .date-tag {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--amber);
+    background: rgba(255,213,0,0.15);
+    border: 1px solid rgba(232,160,0,0.3);
+    padding: 0.35rem 1.2rem;
+    border-radius: 50px;
+    margin-bottom: 1.2rem;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-style: italic;
+    color: var(--text-dark);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+
+  h1 span {
+    color: var(--amber);
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    font-style: italic;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+  }
+
+  .instruction {
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
+    color: var(--amber);
+    letter-spacing: 0.08em;
+    opacity: 0.8;
+  }
+
+  /* Garden */
+  .garden {
+    position: relative;
+    width: 100%;
+    min-height: 75vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 2rem 1rem 0;
+    gap: 0;
+    z-index: 1;
+  }
+
+  /* Flower wrapper */
+  .flower-wrap {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(.34,1.56,.64,1);
+    margin: 0 -6px;
+    z-index: 2;
+    animation: growIn 0.8s cubic-bezier(.34,1.56,.64,1) both;
+  }
+
+  .flower-wrap:hover {
+    transform: scale(1.15) translateY(-8px);
+    z-index: 10;
+  }
+
+  .flower-wrap:hover .flower-svg {
+    filter: drop-shadow(0 8px 24px rgba(240,176,0,0.5));
+  }
+
+  .flower-wrap.clicked {
+    animation: flowerPop 0.5s cubic-bezier(.34,1.56,.64,1);
+  }
+
+  @keyframes growIn {
+    from { transform: scaleY(0) translateY(40px); opacity: 0; transform-origin: bottom; }
+    to { transform: scaleY(1) translateY(0); opacity: 1; transform-origin: bottom; }
+  }
+
+  @keyframes flowerPop {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.3) translateY(-12px); }
+    70% { transform: scale(0.95) translateY(-4px); }
+    100% { transform: scale(1); }
+  }
+
+  .flower-svg {
+    transition: filter 0.3s;
+    display: block;
+  }
+
+  /* Wind sway */
+  .flower-wrap:nth-child(3n+1) { animation-delay: 0.1s; }
+  .flower-wrap:nth-child(3n+2) { animation-delay: 0.25s; }
+  .flower-wrap:nth-child(3n) { animation-delay: 0.4s; }
+
+  .sway {
+    animation: sway 4s ease-in-out infinite;
+    transform-origin: bottom center;
+    animation-delay: var(--sway-delay, 0s);
+  }
+  @keyframes sway {
+    0%, 100% { transform: rotate(0deg); }
+    33% { transform: rotate(1.5deg); }
+    66% { transform: rotate(-1.2deg); }
+  }
+
+  /* Tooltip / Message card */
+  .message-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.85);
+    background: #fffef5;
+    border: 1.5px solid rgba(232,160,0,0.4);
+    border-radius: 20px;
+    padding: 2.5rem 2.8rem;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    z-index: 1000;
+    box-shadow: 0 20px 70px rgba(200,140,0,0.2), 0 2px 10px rgba(0,0,0,0.07);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s, transform 0.35s cubic-bezier(.34,1.56,.64,1);
+  }
+
+  .message-card.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: all;
+  }
+
+  .card-flower {
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .card-nickname {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--amber);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-message {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-style: italic;
+    color: var(--text-dark);
+    line-height: 1.55;
+    font-weight: 400;
+  }
+
+  .card-close {
+    margin-top: 1.4rem;
+    display: inline-block;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    cursor: pointer;
+    border: 1px solid rgba(232,160,0,0.35);
+    padding: 0.4rem 1.2rem;
+    border-radius: 50px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .card-close:hover {
+    background: var(--amber);
+    color: #fff;
+  }
+
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(255,240,160,0.25);
+    backdrop-filter: blur(3px);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s;
+  }
+
+  .overlay.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* Petal burst on click */
+  .petal-burst {
+    position: fixed;
+    pointer-events: none;
+    z-index: 2000;
+  }
+
+  .petal {
+    position: absolute;
+    width: 12px;
+    height: 20px;
+    background: radial-gradient(ellipse, #ffe566 40%, #f0b000 100%);
+    border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
+    transform-origin: center bottom;
+    animation: petalFly 1s ease-out forwards;
+  }
+
+  @keyframes petalFly {
+    0% { transform: translate(0,0) rotate(0deg) scale(1); opacity: 1; }
+    100% { transform: translate(var(--tx), var(--ty)) rotate(var(--tr)) scale(0.3); opacity: 0; }
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem 1rem 3rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .footer-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--text-mid);
+    font-size: 1rem;
+    opacity: 0.7;
+    letter-spacing: 0.04em;
+  }
+
+  /* Floating petals background */
+  .bg-petal {
+    position: fixed;
+    font-size: 1.5rem;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 0;
+    animation: floatPetal 18s linear infinite;
+  }
+
+  @keyframes floatPetal {
+    0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.12; }
+    90% { opacity: 0.12; }
+    100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="date-tag">21 de Marzo · Día de las Flores Amarillas</div>
+  <h1>Para ti, <span>mi musa</span> 🌻</h1>
+  <p class="subtitle">Un jardín que cruzó el océano para llegar a ti</p>
+  <p class="instruction">✦ Toca cada flor ✦</p>
+</header>
+
+<div class="garden" id="garden"></div>
+
+<footer>
+  <p class="footer-text">Con todo mi amor, desde el otro lado del mundo 🌍</p>
+</footer>
+
+<!-- Overlay -->
+<div class="overlay" id="overlay" onclick="closeCard()"></div>
+
+<!-- Message card -->
+<div class="message-card" id="messageCard">
+  <span class="card-flower">🌻</span>
+  <div class="card-nickname" id="cardNickname"></div>
+  <div class="card-message" id="cardMessage"></div>
+  <div class="card-close" onclick="closeCard()">cerrar ✦</div>
+</div>
+
+<script>
+const nicknames = [
+  'mi niña',
+  'cereza',
+  'mi sirena',
+  'mi estrellita',
+  'mi amor',
+  'mi reina',
+  'mi musa',
+  'mi musa',   // extra weight al favorito
+  'mi musa',
+  'cereza',
+];
+
+const messages = [
+  { nick: 'mi niña', msg: 'Cada día que pasa, me enamoro más de la persona que eres.' },
+  { nick: 'cereza', msg: 'Eres dulce, vibrante y llena de vida. No existe nadie como tú.' },
+  { nick: 'mi sirena', msg: 'Aunque los océanos nos separen, mi corazón siempre navega hacia ti.' },
+  { nick: 'mi estrellita', msg: 'Incluso a miles de kilómetros, tu luz es lo primero que busco cada mañana.' },
+  { nick: 'mi amor', msg: 'Nunca creí que una persona pudiera hacerme sentir tan en casa desde tan lejos.' },
+  { nick: 'mi reina', msg: 'Mereces todo lo bello que el mundo tiene para dar y mucho más.' },
+  { nick: 'mi musa', msg: 'Me inspiras a ser mejor, a soñar más alto y a amar sin miedo.' },
+  { nick: 'mi musa', msg: 'Eres la razón por la que creo que vale la pena esperar y luchar por lo que uno quiere.' },
+  { nick: 'mi sirena', msg: 'La distancia duele, pero saber que existes lo cura todo.' },
+  { nick: 'mi estrellita', msg: 'Hoy el mundo está lleno de flores amarillas, pero ninguna tan bonita como tú.' },
+  { nick: 'cereza', msg: 'Tu risa es mi canción favorita aunque no la escuche todos los días.' },
+  { nick: 'mi reina', msg: 'Ojalá pudiera darte esta flor en persona. Pronto, lo prometo.' },
+  { nick: 'mi niña', msg: 'Hay algo en ti que hace que todo tenga más sentido.' },
+  { nick: 'mi amor', msg: 'El tiempo y la distancia son detalles; tú eres lo importante.' },
+  { nick: 'mi musa', msg: 'Gracias por existir en este mundo y por dejarme quererte.' },
+  { nick: 'mi sirena', msg: 'Nadas en mi mente a toda hora, y no me quejo ni un poco.' },
+  { nick: 'mi estrellita', msg: 'Qué suerte la mía, encontrarte en un mundo tan grande.' },
+  { nick: 'cereza', msg: 'Contigo todo es más colorido, más vivo, más real.' },
+  { nick: 'mi niña', msg: 'Me gustan tus maneras, tu forma de ver el mundo, tus pequeñas locuras.' },
+  { nick: 'mi reina', msg: 'Hoy te regalo flores desde acá, porque el amor no conoce fronteras.' },
+  { nick: 'mi musa', msg: 'Eres mi cosa favorita de este mundo. Así de sencillo.' },
+  { nick: 'mi amor', msg: 'Cada mensaje tuyo es la mejor parte de mi día.' },
+  { nick: 'mi sirena', msg: 'Aunque el mar nos separe, nuestras almas siempre encuentran la manera.' },
+  { nick: 'mi estrellita', msg: 'Desde aquí te mando toda la luz que esta flor pueda llevar.' },
+  { nick: 'mi musa', msg: 'Me inspiras más de lo que crees. Siempre.' },
+];
+
+// SVG flower generator
+function createFlowerSVG(size, variant) {
+  const petalColors = [
+    ['#ffe566','#ffd700','#f0b000'],
+    ['#ffd93d','#ffc200','#e8a000'],
+    ['#ffed4a','#f5c518','#dba000'],
+    ['#ffe066','#f0c000','#c89000'],
+  ];
+  const [pl, pm, pd] = petalColors[variant % petalColors.length];
+  const centerColors = ['#b8560a','#c4600d','#a04808'];
+  const cc = centerColors[variant % centerColors.length];
+  const stemColors = ['#5a7a2e','#6b8f3a','#4e6b28'];
+  const sc = stemColors[variant % stemColors.length];
+  const np = 8 + (variant % 3); // 8-10 petals
+  const pr = size * 0.38; // petal orbit radius
+  const cr = size * 0.18; // center radius
+  const pw = size * 0.22; // petal width
+  const ph = size * 0.32; // petal height
+  const stemH = size * 1.1;
+  const stemW = size * 0.08;
+
+  let petals = '';
+  for (let i = 0; i < np; i++) {
+    const angle = (360 / np) * i;
+    petals += `
+      <ellipse
+        cx="${size/2}"
+        cy="${size/2 - pr}"
+        rx="${pw/2}"
+        ry="${ph/2}"
+        fill="url(#pg${variant})"
+        transform="rotate(${angle}, ${size/2}, ${size/2})"
+        opacity="0.95"
+      />`;
+  }
+
+  return `<svg class="flower-svg" width="${size}" height="${size + stemH}" viewBox="0 0 ${size} ${size + stemH}" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="pg${variant}" cx="50%" cy="80%" r="60%">
+        <stop offset="0%" stop-color="${pl}"/>
+        <stop offset="60%" stop-color="${pm}"/>
+        <stop offset="100%" stop-color="${pd}"/>
+      </radialGradient>
+      <radialGradient id="cg${variant}" cx="40%" cy="40%" r="60%">
+        <stop offset="0%" stop-color="${cc}"/>
+        <stop offset="100%" stop-color="#6b2d00"/>
+      </radialGradient>
+    </defs>
+    <!-- Stem -->
+    <path d="M${size/2} ${size * 0.82} Q${size/2 + size*0.1} ${size + stemH*0.5} ${size/2} ${size + stemH}"
+      stroke="${sc}" stroke-width="${stemW}" fill="none" stroke-linecap="round"/>
+    <!-- Leaf -->
+    <ellipse cx="${size/2 + size*0.15}" cy="${size + stemH*0.35}" rx="${size*0.13}" ry="${size*0.07}"
+      fill="${sc}" opacity="0.8" transform="rotate(-30, ${size/2 + size*0.15}, ${size + stemH*0.35})"/>
+    <!-- Petals -->
+    ${petals}
+    <!-- Center -->
+    <circle cx="${size/2}" cy="${size/2}" r="${cr}" fill="url(#cg${variant})"/>
+    <!-- Center dots -->
+    ${Array.from({length:6}, (_,i) => {
+      const a = (360/6)*i * Math.PI/180;
+      const dr = cr * 0.55;
+      return `<circle cx="${size/2 + Math.cos(a)*dr}" cy="${size/2 + Math.sin(a)*dr}" r="${cr*0.12}" fill="${cc}" opacity="0.6"/>`;
+    }).join('')}
+    <circle cx="${size/2}" cy="${size/2}" r="${cr*0.35}" fill="#7a3500" opacity="0.5"/>
+  </svg>`;
+}
+
+function buildGarden() {
+  const garden = document.getElementById('garden');
+  const count = 28;
+  const used = [];
+
+  for (let i = 0; i < count; i++) {
+    const size = 55 + Math.floor(Math.random() * 55); // 55-110px
+    const variant = i % 4;
+    const swayDelay = (Math.random() * 4).toFixed(2) + 's';
+    const growDelay = (i * 0.07).toFixed(2) + 's';
+
+    const wrap = document.createElement('div');
+    wrap.className = 'flower-wrap';
+    wrap.style.cssText = `
+      --sway-delay: ${swayDelay};
+      animation-delay: ${growDelay};
+      width: ${size + 20}px;
+      align-self: flex-end;
+    `;
+    wrap.innerHTML = createFlowerSVG(size, variant);
+
+    // Pick a message
+    const msgIdx = Math.floor(Math.random() * messages.length);
+    const msgData = messages[msgIdx];
+
+    wrap.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showCard(msgData.nick, msgData.msg, e.clientX, e.clientY);
+      wrap.classList.remove('clicked');
+      void wrap.offsetWidth;
+      wrap.classList.add('clicked');
+      burstPetals(e.clientX, e.clientY);
+    });
+
+    // Add sway after grow anim
+    setTimeout(() => {
+      wrap.querySelector('.flower-svg').closest('.flower-wrap') && wrap.classList.add('sway');
+    }, (parseFloat(growDelay) + 0.9) * 1000);
+
+    garden.appendChild(wrap);
+  }
+
+  // Add sway to all after all loaded
+  setTimeout(() => {
+    document.querySelectorAll('.flower-wrap').forEach(fw => fw.classList.add('sway'));
+  }, 3000);
+}
+
+function showCard(nick, msg, x, y) {
+  document.getElementById('cardNickname').textContent = nick + ',';
+  document.getElementById('cardMessage').textContent = msg;
+  document.getElementById('messageCard').classList.add('visible');
+  document.getElementById('overlay').classList.add('visible');
+}
+
+function closeCard() {
+  document.getElementById('messageCard').classList.remove('visible');
+  document.getElementById('overlay').classList.remove('visible');
+}
+
+function burstPetals(cx, cy) {
+  const container = document.createElement('div');
+  container.className = 'petal-burst';
+  container.style.left = cx + 'px';
+  container.style.top = cy + 'px';
+  document.body.appendChild(container);
+
+  for (let i = 0; i < 12; i++) {
+    const petal = document.createElement('div');
+    petal.className = 'petal';
+    const angle = (360 / 12) * i;
+    const dist = 60 + Math.random() * 60;
+    const tx = Math.cos(angle * Math.PI / 180) * dist + 'px';
+    const ty = (Math.sin(angle * Math.PI / 180) * dist - 40) + 'px';
+    const tr = (Math.random() * 360 - 180) + 'deg';
+    petal.style.cssText = `--tx:${tx};--ty:${ty};--tr:${tr};animation-delay:${Math.random()*0.1}s;`;
+    container.appendChild(petal);
+  }
+
+  setTimeout(() => container.remove(), 1200);
+}
+
+// Floating background petals
+function addBgPetals() {
+  const emojis = ['🌻','🌼','✨','💛'];
+  for (let i = 0; i < 8; i++) {
+    const el = document.createElement('div');
+    el.className = 'bg-petal';
+    el.textContent = emojis[i % emojis.length];
+    el.style.left = (Math.random() * 100) + 'vw';
+    el.style.animationDelay = (Math.random() * 18) + 's';
+    el.style.animationDuration = (14 + Math.random() * 10) + 's';
+    el.style.fontSize = (1 + Math.random() * 1.5) + 'rem';
+    document.body.appendChild(el);
+  }
+}
+
+buildGarden();
+addBgPetals();
+</script>
+</body>
+</html>
