@@ -334,45 +334,45 @@
 </div>
 
 <script>
-const nicknames = [
-  'mi niña',
-  'cereza',
-  'mi sirena',
-  'mi estrellita',
-  'mi amor',
-  'mi reina',
-  'mi musa',
-  'mi musa',   // extra weight al favorito
-  'mi musa',
-  'cereza',
-];
-
 const messages = [
-  { nick: 'mi niña', msg: 'Cada día que pasa, me enamoro más de la persona que eres.' },
-  { nick: 'cereza', msg: 'Eres dulce, vibrante y llena de vida. No existe nadie como tú.' },
-  { nick: 'mi sirena', msg: 'Aunque los océanos nos separen, mi corazón siempre navega hacia ti.' },
-  { nick: 'mi estrellita', msg: 'Incluso a miles de kilómetros, tu luz es lo primero que busco cada mañana.' },
-  { nick: 'mi amor', msg: 'Nunca creí que una persona pudiera hacerme sentir tan en casa desde tan lejos.' },
-  { nick: 'mi reina', msg: 'Mereces todo lo bello que el mundo tiene para dar y mucho más.' },
-  { nick: 'mi musa', msg: 'Me inspiras a ser mejor, a soñar más alto y a amar sin miedo.' },
-  { nick: 'mi musa', msg: 'Eres la razón por la que creo que vale la pena esperar y luchar por lo que uno quiere.' },
-  { nick: 'mi sirena', msg: 'La distancia duele, pero saber que existes lo cura todo.' },
-  { nick: 'mi estrellita', msg: 'Hoy el mundo está lleno de flores amarillas, pero ninguna tan bonita como tú.' },
-  { nick: 'cereza', msg: 'Tu risa es mi canción favorita aunque no la escuche todos los días.' },
-  { nick: 'mi reina', msg: 'Ojalá pudiera darte esta flor en persona. Pronto, lo prometo.' },
-  { nick: 'mi niña', msg: 'Hay algo en ti que hace que todo tenga más sentido.' },
-  { nick: 'mi amor', msg: 'El tiempo y la distancia son detalles; tú eres lo importante.' },
-  { nick: 'mi musa', msg: 'Gracias por existir en este mundo y por dejarme quererte.' },
-  { nick: 'mi sirena', msg: 'Nadas en mi mente a toda hora, y no me quejo ni un poco.' },
-  { nick: 'mi estrellita', msg: 'Qué suerte la mía, encontrarte en un mundo tan grande.' },
-  { nick: 'cereza', msg: 'Contigo todo es más colorido, más vivo, más real.' },
-  { nick: 'mi niña', msg: 'Me gustan tus maneras, tu forma de ver el mundo, tus pequeñas locuras.' },
-  { nick: 'mi reina', msg: 'Hoy te regalo flores desde acá, porque el amor no conoce fronteras.' },
-  { nick: 'mi musa', msg: 'Eres mi cosa favorita de este mundo. Así de sencillo.' },
-  { nick: 'mi amor', msg: 'Cada mensaje tuyo es la mejor parte de mi día.' },
-  { nick: 'mi sirena', msg: 'Aunque el mar nos separe, nuestras almas siempre encuentran la manera.' },
-  { nick: 'mi estrellita', msg: 'Desde aquí te mando toda la luz que esta flor pueda llevar.' },
-  { nick: 'mi musa', msg: 'Me inspiras más de lo que crees. Siempre.' },
+  // Amor y distancia
+  { nick: 'mi niña',      msg: 'Cada día que pasa, me enamoro más de la persona que eres.' },
+  { nick: 'cereza',       msg: 'Eres dulce, vibrante y llena de vida. No existe nadie como tú.' },
+  { nick: 'mi sirena',    msg: 'Aunque los océanos nos separen, mi corazón siempre navega hacia ti.' },
+  { nick: 'mi estrellita',msg: 'Incluso a miles de kilómetros, tu luz es lo primero que busco cada mañana.' },
+  { nick: 'mi amor',      msg: 'Nunca creí que una persona pudiera hacerme sentir tan en casa desde tan lejos.' },
+  { nick: 'mi reina',     msg: 'Mereces todo lo bello que el mundo tiene para dar, y mucho más.' },
+  { nick: 'mi musa',      msg: 'Me inspiras a ser mejor, a soñar más alto y a amar sin miedo.' },
+  { nick: 'mi musa',      msg: 'Eres la razón por la que creo que vale la pena esperar y luchar por lo que uno quiere.' },
+  { nick: 'mi sirena',    msg: 'La distancia duele, pero saber que existes lo cura todo.' },
+  { nick: 'mi estrellita',msg: 'Hoy el mundo está lleno de flores amarillas, pero ninguna tan bonita como tú.' },
+  { nick: 'mi niña',      msg: 'Hay algo en ti que hace que todo tenga más sentido.' },
+  { nick: 'mi amor',      msg: 'El tiempo y la distancia son detalles; tú eres lo importante.' },
+  { nick: 'mi musa',      msg: 'Gracias por existir en este mundo y por dejarme quererte.' },
+  { nick: 'mi reina',     msg: 'Ojalá pudiera darte esta flor en persona. Pronto, lo prometo.' },
+  { nick: 'cereza',       msg: 'Contigo todo es más colorido, más vivo, más real.' },
+  { nick: 'mi amor',      msg: 'Cada mensaje tuyo es la mejor parte de mi día.' },
+  { nick: 'mi musa',      msg: 'Eres mi cosa favorita de este mundo. Así de sencillo.' },
+  // Libros
+  { nick: 'mi lectora',   msg: 'Eres de las personas que viven miles de vidas, y yo quiero ser parte de todas ellas.' },
+  { nick: 'mi niña',      msg: 'Me encanta imaginarme leyendo contigo en silencio, cada uno en su libro, juntos.' },
+  { nick: 'mi amor',      msg: 'Eres la protagonista de la historia más bonita que he leído: la nuestra.' },
+  { nick: 'mi musa',      msg: 'Como en los libros que más amas, nuestro final va a valer cada página difícil.' },
+  // Persona (saga)
+  { nick: 'mi compañera', msg: 'Si la vida fuera Persona, tú serías mi Confidant favorito, el que sube primero.' },
+  { nick: 'mi estrellita',msg: 'Como en Persona, contigo el tiempo ordinario se vuelve algo extraordinario.' },
+  { nick: 'mi musa',      msg: 'Tú eres el tipo de persona que le cambia la vida a quien tiene la suerte de conocerte.' },
+  // Bayonetta
+  { nick: 'mi reina',     msg: 'Tienes esa energía de quien no necesita la aprobación de nadie para brillar.' },
+  { nick: 'mi sirena',    msg: 'Eres poderosa, elegante y libre. No hay nadie que se te compare.' },
+  // Cantar
+  { nick: 'mi canción',   msg: 'Tu voz es de las cosas que guardo con más cuidado en mi memoria.' },
+  { nick: 'cereza',       msg: 'Cuando cantas, el mundo entero debería detenerse a escucharte.' },
+  { nick: 'mi niña',      msg: 'Algún día quiero escucharte cantar en persona. Ese día va a ser perfecto.' },
+  // Diseño de modas
+  { nick: 'mi musa',      msg: 'Tienes un ojo para lo bello que pocas personas tienen. Todo lo que tocas tiene estilo.' },
+  { nick: 'mi reina',     msg: 'Ya diseñas sueños con las manos; imagínate lo que vas a lograr.' },
+  { nick: 'mi estrellita',msg: 'El mundo de la moda no sabe todavía lo que se le viene contigo.' },
 ];
 
 // SVG flower generator
@@ -443,13 +443,27 @@ function createFlowerSVG(size, variant) {
   </svg>`;
 }
 
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 function buildGarden() {
   const garden = document.getElementById('garden');
   const count = 28;
-  const used = [];
+
+  // Shuffle and build pool large enough — no repeats within first cycle
+  const shuffled = shuffle(messages);
+  const pool = shuffled.length >= count
+    ? shuffled
+    : [...shuffled, ...shuffle(messages)].slice(0, count);
 
   for (let i = 0; i < count; i++) {
-    const size = 55 + Math.floor(Math.random() * 55); // 55-110px
+    const size = 55 + Math.floor(Math.random() * 55);
     const variant = i % 4;
     const swayDelay = (Math.random() * 4).toFixed(2) + 's';
     const growDelay = (i * 0.07).toFixed(2) + 's';
@@ -464,9 +478,8 @@ function buildGarden() {
     `;
     wrap.innerHTML = createFlowerSVG(size, variant);
 
-    // Pick a message
-    const msgIdx = Math.floor(Math.random() * messages.length);
-    const msgData = messages[msgIdx];
+    // Each flower gets its own unique message
+    const msgData = pool[i];
 
     wrap.addEventListener('click', (e) => {
       e.stopPropagation();
